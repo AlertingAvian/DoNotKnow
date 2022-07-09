@@ -1,0 +1,6 @@
+- Name: DoNotKnow
+  Version: 0.0.0
+  DLL: bin/Debug/DoNotKnow.dll
+  Dependencies:
+    - Name: Everest
+      Verison: 1.3366.0
