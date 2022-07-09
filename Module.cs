@@ -4,6 +4,9 @@ namespace Celeste.Mod.DoNotKnow
 {
     public class DoNotKnow : EverestModule
     {
+
+        // need to reorganize files into code sub-dir but I have more important issues first
+
         public static DoNotKnow Instance;
 
         public DoNotKnow()
