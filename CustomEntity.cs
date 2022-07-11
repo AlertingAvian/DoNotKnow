@@ -14,8 +14,8 @@ namespace Celeste.Mod.DoNotKnow
         public CustomEntity(EntityData data, Vector2 offset) : base(data.Position + offset) // NOT WORKING
         {
             Logger.Log(LogLevel.Info, "DoNotKnow", "Added instance of CustomEntity"); // this will probably never output. but it has
-            //bank = new SpriteBank(GFX.Game, "Graphics/DoNotKnowSpriteBank.xml"); // added because I thought it might help somehow. it doesn't 
-            this.sprite = GFX.SpriteBank.Create("Graphics/DoNotKnowSpriteBank.xml"); // and this prevents the level from loading, also gives useless error message about missing animimations
+            bank = new SpriteBank(GFX.Game, "Graphics/DoNotKnowSpriteBank.xml"); // added because I thought it might help somehow. it doesn't 
+            this.sprite = bank.Create("CustomEntity"); // and this prevents the level from loading, also gives useless error message about missing animimations
             //this.sprite.AddLoop("idle", "", 0.1f); // not needed if using a sprite bank
 
             // changed to allow aiden to test things
