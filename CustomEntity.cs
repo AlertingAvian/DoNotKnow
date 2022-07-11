@@ -19,6 +19,7 @@ namespace Celeste.Mod.DoNotKnow
             //this.sprite.AddLoop("idle", "", 0.1f); // not needed if using a sprite bank
 
             // changed to allow aiden to test things
+            // aiden sux
 
             base.Add(this.sprite);
             this.sprite.Play("idle"); // not sure if i need
