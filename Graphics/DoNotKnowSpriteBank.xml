@@ -3,6 +3,6 @@
     <CustomEntity path="DoNotKnow/CustomEntity/" start="idle">
         <Origin x="0" y="0"/>
         <Center/>
-        <Loop id="idle" path="idle" delay="0.08"/>
+        <Loop id="idle" path="idle" delay="1.0"/>
     </CustomEntity>
 </Sprites>

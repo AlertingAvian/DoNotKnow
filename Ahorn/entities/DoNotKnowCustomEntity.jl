@@ -1,7 +1,7 @@
 module DoNotKnowCustomEntity
 using ..Ahorn, Maple
 
-sprite = "DoNotKnow/CustomEntity/idle/idle00"
+sprite = "DoNotKnow/CustomEntity/idle00"
 
 @mapdef Entity "DoNotKnow/CustomEntity" CustomEntity(x::Integer, y::Integer)
 

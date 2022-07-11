@@ -1,6 +1,7 @@
 ﻿using Celeste.Mod.Entities;
 using Microsoft.Xna.Framework;
 using Monocle;
+using System;
 
 namespace Celeste.Mod.DoNotKnow
 {
@@ -11,19 +12,38 @@ namespace Celeste.Mod.DoNotKnow
         private Sprite sprite;
         private SpriteBank bank;
 
-        public CustomEntity(EntityData data, Vector2 offset) : base(data.Position + offset) // NOT WORKING
-        {
-            Logger.Log(LogLevel.Info, "DoNotKnow", "Added instance of CustomEntity"); // this will probably never output. but it has
-            bank = new SpriteBank(GFX.Game, "Graphics/DoNotKnowSpriteBank.xml"); // added because I thought it might help somehow. it doesn't 
-            this.sprite = bank.Create("CustomEntity"); // and this prevents the level from loading, also gives useless error message about missing animimations
-            //this.sprite.AddLoop("idle", "", 0.1f); // not needed if using a sprite bank
+        private PlayerCollider pc;
 
-            // changed to allow aiden to test things
-            // aiden sux
+        private float respawnTimer;
+
+        public CustomEntity(EntityData data, Vector2 offset) : base(data.Position + offset)
+        {
+            Logger.Log(LogLevel.Info, "DoNotKnow", "Added instance of CustomEntity");
+            Logger.Log(LogLevel.Debug, "DoNotKnow", base.Center.ToString());
+            bank = new SpriteBank(GFX.Game, "Graphics/DoNotKnowSpriteBank.xml");
+            this.sprite = bank.Create("CustomEntity");
 
             base.Add(this.sprite);
-            this.sprite.Play("idle"); // not sure if i need
+            this.sprite.Play("idle");
+
+            base.Collider = new Hitbox(64f, 64f, -32f, -32f);
+            base.Add(this.pc = new PlayerCollider(new Action<Player> (this.OnCollide), null, null));
+
+
             base.Depth = -10000;
+        }
+
+        private void OnCollide(Player player)
+        {
+            this.Collidable = false;
+            this.respawnTimer = 3f;
+            player.ExplodeLaunch(new Vector2(0f,0f), false);
+            return;
+        }
+
+        private void Respawn()
+        {
+            this.Collidable = true;
         }
 
         public override void Added(Scene scene)
@@ -40,6 +60,14 @@ namespace Celeste.Mod.DoNotKnow
         public override void Update()
         {
             base.Update();
+            if(this.respawnTimer > 0f)
+            {
+                this.respawnTimer -= Engine.DeltaTime;
+                if(this.respawnTimer <= 0f)
+                {
+                    this.Respawn();
+                }
+            }
         }
 
         public override void Render()
